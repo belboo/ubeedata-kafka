@@ -1,0 +1,156 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2019-05-21T02:53:23Z
+  generation: 1
+  labels:
+    app: kafka-connect
+    pod-template-hash: 654fc8b447
+    release: confluent
+  name: confluent-kafka-connect-654fc8b447
+  namespace: production
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: confluent-kafka-connect
+    uid: 995c8e92-7b73-11e9-8504-42010af001fc
+  resourceVersion: "194822586"
+  selfLink: /apis/extensions/v1beta1/namespaces/production/replicasets/confluent-kafka-connect-654fc8b447
+  uid: 995dba13-7b73-11e9-8504-42010af001fc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-connect
+      pod-template-hash: 654fc8b447
+      release: confluent
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kafka-connect
+        pod-template-hash: 654fc8b447
+        release: confluent
+    spec:
+      containers:
+      - env:
+        - name: CONNECT_BOOTSTRAP_SERVERS
+          value: confluent-kafka:9092
+        - name: CONNECT_REST_PORT
+          value: "8083"
+        - name: CONNECT_GROUP_ID
+          value: kafka-connect
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: CONNECT_REST_ADVERTISED_HOST_NAME
+          value: $(POD_NAME)
+        - name: CONNECT_PLUGIN_PATH
+          value: /usr/share/java,/var/lib/kafka-connect/plugins
+        - name: CONNECT_CONFIG_STORAGE_TOPIC
+          value: _connect.config
+        - name: CONNECT_OFFSET_STORAGE_TOPIC
+          value: _connect.offsets
+        - name: CONNECT_STATUS_STORAGE_TOPIC
+          value: _connect.status
+        - name: CONNECT_REPLICATION_FACTOR
+          value: "3"
+        - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+          value: "3"
+        - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+          value: "3"
+        - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+          value: "3"
+        - name: CONNECT_KEY_CONVERTER
+          value: org.apache.kafka.connect.storage.StringConverter
+        - name: CONNECT_VALUE_CONVERTER
+          value: io.confluent.connect.avro.AvroConverter
+        - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
+          value: http://confluent-schema-registry.$(POD_NAMESPACE).svc.cluster.local:8081
+        - name: CONNECT_INTERNAL_KEY_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_INTERNAL_VALUE_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_LOG4J_ROOT_LOGLEVEL
+          value: INFO
+        - name: CONNECT_LOG4J_LOGGERS
+          value: org.reflections=ERROR
+        - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+          value: "2"
+        - name: CONNECT_OFFSET_FLUSH_TIMEOUT_MS
+          value: "50000"
+        - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+          value: "2"
+        - name: CONNECT_PRODUCER_ACKS
+          value: "1"
+        - name: CONNECT_PRODUCER_REQUEST_TIMEOUT_MS
+          value: "60000"
+        - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+          value: "2"
+        - name: CONNECT_VALUE_CONVERTER
+          value: org.apache.kafka.connect.json.JsonConverter
+        - name: CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE
+          value: "false"
+        image: confluentinc/cp-kafka-connect:4.1.0
+        imagePullPolicy: IfNotPresent
+        name: kafka-connect
+        ports:
+        - containerPort: 8083
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 40
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8083
+          timeoutSeconds: 5
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/kafka-connect/plugins
+          name: plugins
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - bash
+        - -c
+        - |
+          cp -R /kafka/connect/* /var/lib/kafka-connect/plugins/
+          exec true
+        image: debezium/connect:0.9.5.Final
+        imagePullPolicy: Always
+        name: debezium
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/kafka-connect/plugins
+          name: plugins
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: plugins
+status:
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

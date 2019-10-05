@@ -1,0 +1,27 @@
+{
+    "name": "bm-core-mysql",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max": 1,
+        "database.hostname": "mysql-proxy.production.svc.cluster.local",
+        "database.port": "3306",
+        "database.user": "kafka-connect",
+        "database.password": "b8b8d8bf0512da5c785027e766ab2de9a0cb9b604f55ee9ab02e59c5b327e8fa",
+        "database.server.name": "bm-core",
+        "database.whitelist": "phoenix_db",
+        "table.whitelist": "phoenix_db.agent_cs_operator,phoenix_db.agents,phoenix_db.audit,phoenix_db.audit_actions,phoenix_db.badge_deliveries,phoenix_db.badges,phoenix_db.cities,phoenix_db.companies,phoenix_db.countries,phoenix_db.country_document_validations,phoenix_db.cs_booking_use_cases,phoenix_db.cs_bookings,phoenix_db.cs_operators,phoenix_db.delivery_note_lines,phoenix_db.delivery_notes,phoenix_db.devices,phoenix_db.driving_license_validations,phoenix_db.driving_licenses,phoenix_db.employees,phoenix_db.invites,phoenix_db.invoice_lines,phoenix_db.invoice_series,phoenix_db.invoices,phoenix_db.locations,phoenix_db.payment_methods,phoenix_db.payment_providers,phoenix_db.payment_transactions,phoenix_db.promotions,phoenix_db.roles,phoenix_db.services,phoenix_db.status,phoenix_db.tariff_city,phoenix_db.tariff_lines,phoenix_db.tariffs,phoenix_db.user_payment_method,phoenix_db.user_profiles,phoenix_db.user_promotion,phoenix_db.user_promotion_transactions,phoenix_db.user_relations,phoenix_db.user_tariff,phoenix_db.user_terms_conditions,phoenix_db.users,phoenix_db.vehicle,phoenix_db.vehicle_brands,phoenix_db.vehicle_categories,phoenix_db.vehicle_damages,phoenix_db.vehicle_equipment,phoenix_db.vehicle_incidents,phoenix_db.vehicle_location,phoenix_db.vehicle_models,phoenix_db.vehicles",
+        "database.history.kafka.bootstrap.servers": "confluent-kafka.system.svc.cluster.local:9092",
+        "database.history.kafka.topic": "debezium.history.bm-core",
+        "include.schema.changes": "false",
+        "transforms": "key",
+        "transforms.key.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+        "transforms.key.field": "id",
+        "connect.timeout.ms": 90000,
+        "database.history.kafka.producer.acks": 1,
+        "database.history.kafka.producer.request.timeout.ms": 60000,
+        "database.history.producer.acks": 1,
+        "database.history.producer.request.timeout.ms": 60000,
+        "producer.acks": 1,
+        "producer.request.timeout.ms": 60000
+    }
+}

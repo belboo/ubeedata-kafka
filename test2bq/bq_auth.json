@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "phoenix-164312",
+  "private_key_id": "b1abd14ee870ebc39f092aa70744596be4806914",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCJ6Med6YSDMj3\npbhnKi25PVwyDXvj+AnN7XHSF0O6n/UeGnGkWTqj2fUKQre8CWfb/hLIY/xstEdp\n4ju6NSHRliWBDD4Q3s5K88WqZPQn1zq2ctGgFj7sIefW6AplhWLli/tn32DN+Yeg\nRcAoIaOuoGu29hInQnz4v/7NxJMH+R2AuU76Y8KDxwcgKR6FkBOmhF7u2kFLCU42\nWPLeWjR6si12K+ZXu+NwpiHPp0hlA8cfKmBrnZAL1XpEerkFaoOuQtYMqSgPtm6o\n03CvS934dwzCVd4QdLyDJWczloP1XoPEmmuJqYTge93tbNXDNW2Vf8rEARn6DlKM\njyVWO+0JAgMBAAECggEAMJmlbln6+yeyIrOb/k8DlQv0CR9w9LbBFYgrZrCmJpAl\n1nw+GCqx0BQeD4x1257rHZly8DB/HmLeQXX9B3aHWaRhDPWYj7aGIyL0Rtvwdgyd\nSNBjAtSuuYMfOp9pAtKp19X7f5vd6pFcztTG7gTFqU/Exs6/6o3tJINC8BUVzPey\nEVsQ1OMADGWsBMze8XRVFQojEm4P5Lv4/3CmmS5U+O/nCOD9TxTl/XP0p67wPhFg\nCH+20g+6VfCEcC7emJzQNA3jSrc/LclDkVgNyWCTQBZ6ACXnnr6q8bVtscI+Rw5s\nOplKfFoAmUIgs3TMqOaWKsfQtbYEe+BqEo5fpReEpQKBgQDrP9UN24KEqfgZy6oI\n61sOTElc+1Uf89kInV6dF7KBS9KQMHNov9xqWrl8i4Pw3XZiKL9bZLIXQSvAj9q2\nQ1Jqk5MJK8nodDBcs2LRcEaGZTAXZBz+xvuJSFP0efZTcW38zErpafSOhEhFRMsg\nfFyRC4vdvqYTk07vZbLlcOUq1wKBgQDTR9lv67a0EW3LibIR5h8CbbO945XSkdmP\nHzOyzM32A9451zimyhIsKcJatguXnn9lJtwiohpb0YAR3OWQ0Y1jWtphha8D2v94\ntUsvAh/gW75F3U+MxfM0cOo0/SJJrnvEJCcLEDQY19ge1kS7UhAyHGfw/fKL512X\ncdHef2+LHwKBgE4Rx+2qXD0Ufv5ohUwidvxeurX9vnk1HmBqgTyW4alg9UbenV40\n1bwB0a6QSkAD7saSiTaWSzfGa/Oiic2Ut+Qgh1oyyvW2oVoSOggRP4ZYTEZm9exj\nMpSTiTEHzIRSj1KmpXGitQMayTUbqGFmg/2qnEcBfvHeIAL4eA8GkTbPAoGAeMIu\nQ0wEZzM3AAi5oIVY3/h3rWbw8SOvp5/72ow4hA59661ZkesZK+jKTzKRuZ07z0LA\nu4LPcf9yJcON6pH7L/hzrR3NhHSdZA6q5DlgosmNHT17BEj30tde5d5wxJBX6SmI\nr0gZnsFvo2BwdGhZHWsi9ZkQEmqxEahafcN0q50CgYEAkf5ZzY44de3TWdlJVcKr\n/4lyXSJkCi/Piw880s7bKTEJaXIIy3QgdAhzb903NY55RQousd9tFGH98EOE+xd1\nTj/YCCNxubkBnYzPS3xUwk7k+OdzFqTjhXxzDJSC6v2lS3ejCsiUFbawx5NJFBDk\ny/TTMEah8bwOzLFTB/ksqrU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "looker-user@phoenix-164312.iam.gserviceaccount.com",
+  "client_id": "111673571675571341139",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/looker-user%40phoenix-164312.iam.gserviceaccount.com"
+}

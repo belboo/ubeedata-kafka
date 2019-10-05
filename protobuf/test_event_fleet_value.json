@@ -1,0 +1,19 @@
+{
+	"latitude": 39.4074898,
+	"dateTime": "2019-06-28T13:40:00Z",
+	"longitude": 3.21251845,
+	"id": "bD6CAE98",
+	"device": {
+		"database": "telefonica_europcar_sp",
+		"serialNumber": "G7C121003DD9",
+		"name": "8981KSC",
+		"vehicleIdentificationNumber": "TMBZZZAAZKD608144",
+		"deviceType": "GO7",
+		"activeFrom": "2019-05-28T08:40:59.261Z",
+		"id": "b1115",
+		"timeZoneId": "America/New_York",
+		"owner": "",
+		"engineVehicleIdentificationNumber": "TMBZZZAAZKD608144"
+	},
+	"speed": 37
+}

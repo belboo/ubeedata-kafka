@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package data.test.bq_connector;
+
+message VTFleetEvent {
+  string id = 1;
+  string dateTime = 2;
+  float latitude = 3;
+  float longitude = 4;
+  float speed = 5;
+
+  message Device {
+    string number = 1;
+    string database = 2;
+//    string serialNumber = 3;
+//    string name = 4;
+//    string vehicleIdentificationNumber = 5;
+//    string deviceType = 6;
+//    string activeFrom = 7;
+//    string id = 8;
+//    string timeZoneId = 9;
+//    string owner = 10;
+//    string engineVehicleIdentificationNumber = 11;
+  }
+
+  Device device = 6;
+}

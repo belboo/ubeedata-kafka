@@ -1,0 +1,32 @@
+[
+	{
+		"name": "id",
+		"type": "STRING",
+		"mode": "NULLABLE"
+	},
+	{
+		"name": "datetime",
+		"type": "STRING",
+		"mode": "NULLABLE"
+	},
+	{
+		"name": "datetime_utc",
+		"type": "TIMESTAMP",
+		"mode": "NULLABLE"
+	},
+	{
+		"name": "latitude",
+		"type": "FLOAT",
+		"mode": "NULLABLE"
+	},
+	{
+		"name": "longitude",
+		"type": "FLOAT",
+		"mode": "NULLABLE"
+	},
+	{
+		"name": "device_id",
+		"type": "STRING",
+		"mode": "NULLABLE"
+	}
+]

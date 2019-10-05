@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  creationTimestamp: 2019-05-21T02:53:23Z
+  generation: 1
+  labels:
+    app: kafka
+    chart: confluent-0.5.1
+    heritage: Tiller
+    release: confluent
+  name: confluent-kafka
+  namespace: production
+  resourceVersion: "194822018"
+  selfLink: /apis/apps/v1/namespaces/production/statefulsets/confluent-kafka
+  uid: 9961ce05-7b73-11e9-8504-42010af001fc
+spec:
+  podManagementPolicy: Parallel
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka
+      release: confluent
+  serviceName: confluent-kafka-headless
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kafka
+        release: confluent
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cloud.google.com/gke-nodepool
+                operator: In
+                values:
+                - persistence-a
+                - persistence-b
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: kafka
+                release: confluent
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          export KAFKA_BROKER_ID=$(let a=${HOSTNAME##*-}+1; echo $a)
+          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${HOSTNAME}.${KAFKA_HEADLESS_SERVICE}.${POD_NAMESPACE}.svc.cluster.local:9092
+          /etc/confluent/docker/run
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: confluent-zookeeper:2181
+        - name: KAFKA_HEADLESS_SERVICE
+          value: confluent-kafka-headless
+        - name: KAFKA_LOG_DIRS
+          value: /var/lib/kafka/data/topics
+        - name: KAFKA_AUTO_CREATE_TOPIC_ENABLE
+          value: "true"
+        - name: KAFKA_DEFAULT_REPLICATION_FACTOR
+          value: "2"
+        - name: KAFKA_DELETE_TOPIC_ENABLE
+          value: "true"
+        - name: KAFKA_NUM_PARTITIONS
+          value: "10"
+        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          value: "2"
+        image: confluentinc/cp-kafka:4.1.0
+        imagePullPolicy: IfNotPresent
+        name: kafka
+        ports:
+        - containerPort: 9092
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 40
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 9092
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "4"
+            memory: 6Gi
+          requests:
+            cpu: "2"
+            memory: 2Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/kafka/data
+          name: kafka-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - key: dedicated
+        operator: Equal
+        value: persistence
+  updateStrategy:
+    type: OnDelete
+  volumeClaimTemplates:
+  - metadata:
+      creationTimestamp: null
+      name: kafka-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 500Gi
+      storageClassName: ssd
+    status:
+      phase: Pending
+status:
+  collisionCount: 0
+  currentReplicas: 3
+  currentRevision: confluent-kafka-6cc4659458
+  observedGeneration: 1
+  readyReplicas: 3
+  replicas: 3
+  updateRevision: confluent-kafka-6cc4659458
+  updatedReplicas: 3
